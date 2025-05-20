@@ -20,13 +20,13 @@ const MainHeaderSection = () => {
 const BalanceCard = ({userbalance}) => {
 return(
   <div className='max-w-sm mx-auto m-4 h-24 bg-orange-500 border rounded-lg'>
-    <h2 className='text-2xl w-1/2 mx-auto text-center m-2 bg-gray-200 rounded-lg'>Wallet Balance</h2>
-    <p className='text-center p-4'>N: {userbalance}</p>
+    <h2 className='text-md w-1/2 mx-auto text-center m-2 rounded-lg'>Available Balance</h2>
+    <p className='text-center p-2 text-md w-1/2 mx-auto text-center m-2 bg-gray-200 rounded-lg'>N: 200, 000{userbalance}</p>
   </div>
 )
 }
   return (
-    <div className="bg-gray-500 min-h-screen">
+    <div className="bg-gray-500 min-h-screen m-2">
     <MainHeaderSection/>
       <div>
       <BalanceCard/>
