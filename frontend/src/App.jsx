@@ -9,15 +9,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/loginpage" element={<Login />} />
-      <Route path="/signuppage" element={<SignUp />} />
-      <Route path="/userdashboard" element={<UserDashboard />} />
-      <Route path="/adminpage" element={<Admin />} />
-    </Routes>
-   <ToastContainer 
+    <div className="min-h-screen p-2 bg-gray-300 text-gray-900 font-sans">
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/loginpage" element={<Login />} />
+    <Route path="/signuppage" element={<SignUp />} />
+    <Route path="/userdashboard" element={<UserDashboard />} />
+    <Route path="/adminpage" element={<Admin />} />
+  </Routes>
+  <ToastContainer 
   position="bottom-left"
   autoClose={5000}
   hideProgressBar={false}
@@ -29,7 +29,7 @@ function App() {
   pauseOnHover
   theme="colored"
 />
-</>
+</div>
   );
 }
 

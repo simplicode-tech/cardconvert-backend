@@ -3,9 +3,9 @@ import ProductCard from "../components/FeaturedCard";
 
 export default function Home() {
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col">
+    <div className="max-w-screen bg-gray-100 min-h-screen">
       {/* Header */}
-      <header className="bg-blue-600 text-white p-4 shadow-md">
+      <header className="bg-blue-600 text-white p-4 shadow-md">v2q
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <h1 className="text-xl font-bold">BrandName</h1>
           <nav className="space-x-6">

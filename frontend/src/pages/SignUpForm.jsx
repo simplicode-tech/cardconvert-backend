@@ -20,7 +20,7 @@ const SignUpForm = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-100 to-gray-100">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-lg rounded-xl p-6 max-w-md w-full">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Create Your Account</h1>
+       <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Create Your Account</h1>
 
         {/* Input Fields */}
         {[
