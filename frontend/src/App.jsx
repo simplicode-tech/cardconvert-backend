@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className="min-h-screen p-2 bg-gray-300 text-gray-900 font-sans">
+    <div className="min-h-screen p-2 bg-gray-500 text-gray-900 font-sans">
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/loginpage" element={<Login />} />

@@ -1,8 +1,18 @@
 import {Link} from 'react-router-dom'
 import Button from '../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faCreditCard, faCreditCardAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faCreditCard, faUser } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
+
 export default function UserDashboard() {
+  //transactions components controll
+const [isTrans, setIsTrans] = useState(false);
+const openTrans = () => {
+  setIsTrans(true);
+};
+const closeTrans = () => {
+  setIsTrans(false);
+}
  // header section 
 const MainHeaderSection = () => {
       return(
@@ -33,17 +43,45 @@ const ActionCard = () => {
     <Button value={'Sell Gift Cards'} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
     <Button value={'Sell Crypto'} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
     <Button value={'Withdraw'} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
-    <Button value={'Transactions'} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
+    <Button value={'Transactions'} handleClick={openTrans} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
     <Button value={'Help Center'} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
     <Button value={'Rewards'} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
     </div>
   )
 };
+// transactions hisory cards
+const TransactionsHistory = () => {
+  return(
+   <div>
+    <h2>Recent Transactions</h2>
+    <Button value={'close'} handleClick={closeTrans} className={'bg-gray-200 rounded-md border-2'}/>
+     <div className='grid grid-cols-4 gap-2 mx-auto p-2 bg-gray-400 border m-2 rounded-md'>
+      <div>
+        <p className='text-sm font-bold text-gray-200'>Id</p>
+      <ul><li className='text-xs'>265erjhg</li></ul>
+      </div>
+      <div>
+        <p className='text-sm font-bold text-gray-200'>Descs</p>
+      <ul><li className='text-xs'>Apple Gift Card</li></ul>
+      </div>
+      <div>
+        <p className='text-sm font-bold text-gray-200'>Date$Time</p>
+      <ul><li className='text-xs'>mon,23.5.2025</li></ul>
+      </div>
+      <div>
+        <p className='text-sm font-bold text-gray-200'>Status</p>
+      <ul><li className='text-xs'>Approved</li></ul>
+      </div>
+    </div>
+   </div>
+  )
+}
   return (
     <div className="bg-gray-500 max-h-screen m-2">
     <MainHeaderSection/>
     <BalanceCard/>
     <ActionCard/>
+   {isTrans && <TransactionsHistory/>} 
     </div>
   )
 }
