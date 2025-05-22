@@ -57,9 +57,9 @@ const SellGiftCards = () => {
   const cardscate = ['apple', 'amazon', 'google', 'sephora', 'visa', 'xbox'];
   const cardstype = ['apple (20 - 100)', 'amazon (100 - 500)', 'google (50 - 100)', 'sephora (20 - 100)', 'visa (20 - 100)', 'xbox (20 - 100)']
 return(
-  <div className='fixed z-50'>
+  <div className='border-2'>
     <p onClick={closeSellCard} className='bg-gray-200 rounded-md border-2 w-10'>close</p>
-    <h1 className='text-center font-bold'>Upload Gift Cards{amountofcard}</h1>
+    <h1 className='text-center font-bold'>Upload Gift Cards</h1>
     <p className='my-2'>Select Card Category:</p>
       <select className='w-full p-3 bg-gray-200'>
         {cardscate.map((card, index) => (
