@@ -3,10 +3,12 @@ import Button from '../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { MainHeaderSection } from '../components/MainHeaderSection';
+import { SpinnerLoading } from '../components/SpinnerLoading';
 
 export default function UserDashboard() {
 
-
+// spinner loading state
+const [isLoading, setIsLoading] = useState(false);
 // sell cards component control
 const [isSellCard, setIsSellCard] = useState(false);
 const openSellCard = () => {
@@ -116,6 +118,7 @@ const TransactionsHistory = () => {
     <ActionCard/>
     {isSellCard && <SellGiftCards/>}
    {isTrans && <TransactionsHistory/>} 
+   {isLoading && <SpinnerLoading message={'Loading....'}/>}
     </div>
   )
 }

@@ -3,12 +3,17 @@ import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import { SpinnerLoading } from "../components/SpinnerLoading";
 
 export default function Login() {
+
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const response = await axios.post("https://cardconvert-backend.onrender.com/user/loginpage", data);
       toast.success(response.data.message);
@@ -20,6 +25,7 @@ export default function Login() {
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed, please try again!");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -62,6 +68,7 @@ export default function Login() {
           </Link>
         </p>
       </form>
+      {isLoading && <SpinnerLoading message={'Welcome Back...'}/>}
     </div>
   );
 }
