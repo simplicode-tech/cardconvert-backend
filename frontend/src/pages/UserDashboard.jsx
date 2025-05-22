@@ -56,25 +56,26 @@ const ActionCard = () => {
 const SellGiftCards = () => {
   const cardscate = ['apple', 'amazon', 'google', 'sephora', 'visa', 'xbox'];
   const cardstype = ['apple (20 - 100)', 'amazon (100 - 500)', 'google (50 - 100)', 'sephora (20 - 100)', 'visa (20 - 100)', 'xbox (20 - 100)']
-return(
+   
+  return(
   <div className='border-2 px-4 mx-auto my-2 bg-gray-900 fixed inset-0'>
     <p onClick={closeSellCard} className='bg-gray-200 rounded-md border-2 w-10'>close</p>
-    <h1 className='text-center text-white font-bold'>Upload Gift Cards</h1>
-    <p className='my-2'>Select Card Category:</p>
-      <select className='w-full p-3 bg-gray-200'>
+    <h1 className='text-center text-white font-bold'>Upload Gift Cards {cardType}</h1>
+    <p className='my-2 text-white'>Select Card Category:</p>
+      <select className='w-full p-3 bg-gray-200' value={cardcategory} onChange={(e) => setCardCategory(e.target.value)}>
         {cardscate.map((card, index) => (
-          <option key={index} className=' bg-gray-500'>{card}</option>
+          <option key={index} className='bg-gray-500'>{card}</option>
         ))}
       </select>
-      <p className='my-2'>Select Card Type:</p>
-      <select className='w-full p-3 bg-gray-200'>
+      <p className='my-2 text-white'>Select Card Type:</p>
+      <select className='w-full p-3 bg-gray-200'  value={cardType} onChange={(e) => setCardType(e.target.value)}>
         {cardstype.map((card, index) => (
           <option key={index} className='bg-gray-500'>{card}</option>
         ))}
       </select>
-      <p className='my-2'>Amount:</p>
+      <p className='my-2 text-white'>Amount:</p>
       <input type='text' value={amountofcard} onChange={(e) => setAmountofcard(e.target.value)} placeholder='Amount of the Card' className='w-full p-3 bg-gray-200' />
-      <p className='my-2'>Upload Photos of the Gift Cards:</p>
+      <p className='my-2 text-white'>Upload Photos of the Gift Cards:</p>
       <input type='file' placeholder='Upload Card Photos' className='w-full p-3 bg-gray-200' />
       <Button value={'SUBMIT'} className={'my-4 flex items-center bg-gray-600 p-2 rounded-md border-2 border-gray-900 font-bold text-white'}/>
   </div>
