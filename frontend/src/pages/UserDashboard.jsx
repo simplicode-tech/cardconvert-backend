@@ -1,32 +1,34 @@
 import {Link} from 'react-router-dom'
 import Button from '../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faCreditCard, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { MainHeaderSection } from '../components/MainHeaderSection';
 
 export default function UserDashboard() {
-  //transactions components controll
+
+
+// sell cards component control
+const [isSellCard, setIsSellCard] = useState(false);
+const openSellCard = () => {
+  setIsSellCard(true);
+};
+const closeSellCard = () => {
+  setIsSellCard(false);
+};
+const [cardcategory, setCardCategory] = useState('');
+const [cardType, setCardType] = useState('');
+const [amountofcard, setAmountofcard] = useState(null);
+const [cardphotos, setCardPhotos] = useState(null);
+
+//transactions components controll
 const [isTrans, setIsTrans] = useState(false);
 const openTrans = () => {
   setIsTrans(true);
 };
 const closeTrans = () => {
   setIsTrans(false);
-}
- // header section 
-const MainHeaderSection = () => {
-      return(
-        <section className="w-full mx-auto p-2 flex items-center rounded bg-gray-900">
-        <div className='w-sm p-4 m-1 flex items-center font-bold rounded-md border bg-gray-100'> 
-         <h1 className='text-md'>Card Convert <FontAwesomeIcon icon={faCreditCard}/></h1>
-       </div>
-       <div className='w-screen flex justify-evenly font-bold'>
-          <Link to='/loginpage' className="p-4 m-2 bg-gray-900 text-white rounded-md border"><FontAwesomeIcon icon={faUser}/></Link>
-          <FontAwesomeIcon icon={faBell} className='text-xl text-white p-4 border m-2 rounded-md' Alert/>
-        </div>
-        </section>
-      )
-     };
+};
+ 
 //balance card
 const BalanceCard = ({userbalance}) => {
 return(
@@ -40,7 +42,7 @@ return(
 const ActionCard = () => {
   return(
     <div className='w-full p-2 bg-gray-900 rounded-md border flex flex-wrap justify-evenly'>
-    <Button value={'Sell Gift Cards'} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
+    <Button value={'Sell Gift Cards'} handleClick={openSellCard} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
     <Button value={'Sell Crypto'} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
     <Button value={'Withdraw'} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
     <Button value={'Transactions'} handleClick={openTrans} className={'bg-gray-200 p-2 rounded-md border-2 font-bold'}/>
@@ -49,6 +51,36 @@ const ActionCard = () => {
     </div>
   )
 };
+
+// sell gift cards
+const SellGiftCards = () => {
+  const cardscate = ['apple', 'amazon', 'google', 'sephora', 'visa', 'xbox'];
+  const cardstype = ['apple (20 - 100)', 'amazon (100 - 500)', 'google (50 - 100)', 'sephora (20 - 100)', 'visa (20 - 100)', 'xbox (20 - 100)']
+return(
+  <div className='fixed z-50'>
+    <p onClick={closeSellCard} className='bg-gray-200 rounded-md border-2 w-10'>close</p>
+    <h1 className='text-center font-bold'>Upload Gift Cards{amountofcard}</h1>
+    <p className='my-2'>Select Card Category:</p>
+      <select className='w-full p-3 bg-gray-200'>
+        {cardscate.map((card, index) => (
+          <option key={index} className='my-4 p-2 bg-gray-500'>{card}</option>
+        ))}
+      </select>
+      <p className='my-2'>Select Card Type:</p>
+      <select className='w-full p-3 bg-gray-200'>
+        {cardstype.map((card, index) => (
+          <option key={index} className='my-4 p-2 bg-gray-500'>{card}</option>
+        ))}
+      </select>
+      <p className='my-2'>Amount:</p>
+      <input type='text' value={amountofcard} onChange={(e) => setAmountofcard(e.target.value)} placeholder='Amount of the Card' className='w-full p-3 bg-gray-200' />
+      <p className='my-2'>Upload Photos of the Gift Cards:</p>
+      <input type='file' placeholder='Upload Card Photos' className='w-full p-3 bg-gray-200' />
+      <Button value={'SUBMIT'} className={'my-4 flex items-center bg-gray-600 p-2 rounded-md border-2 border-gray-900 font-bold text-white'}/>
+  </div>
+)
+};
+
 // transactions hisory cards
 const TransactionsHistory = () => {
   return(
@@ -75,12 +107,13 @@ const TransactionsHistory = () => {
     </div>
    </div>
   )
-}
+};
   return (
     <div className="bg-gray-500 max-h-screen m-2">
     <MainHeaderSection/>
     <BalanceCard/>
     <ActionCard/>
+    {isSellCard && <SellGiftCards/>}
    {isTrans && <TransactionsHistory/>} 
     </div>
   )
