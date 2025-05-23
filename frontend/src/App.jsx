@@ -12,8 +12,8 @@ function App() {
     <div className="min-h-screen p-2 bg-gray-500 text-gray-900 font-sans">
   <Routes>
     <Route path="/" element={<Home />} />
-    <Route path="/loginpage" element={<Login />} />
-    <Route path="/signuppage" element={<SignUp />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/signup" element={<SignUp />} />
     <Route path="/userdashboard" element={<UserDashboard />} />
     <Route path="/adminpage" element={<Admin />} />
   </Routes>

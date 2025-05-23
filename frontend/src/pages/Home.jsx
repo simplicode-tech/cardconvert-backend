@@ -12,7 +12,7 @@ export default function Home() {
             <Link to="/" className="hover:underline">Home</Link>
             <Link to="/products" className="hover:underline">Products</Link>
             <Link to="/contact" className="hover:underline">Contact</Link>
-            <Link to="/loginpage" className="bg-white text-blue-600 px-4 py-2 rounded-md">Login</Link>
+            <Link to="/login" className="bg-white text-blue-600 px-4 py-2 rounded-md">Login</Link>
           </nav>
         </div>
       </header>
@@ -21,7 +21,7 @@ export default function Home() {
       <section className="bg-blue-500 text-white text-center py-20">
         <h2 className="text-4xl font-bold">Exchange Gift Cards Securely</h2>
         <p className="text-lg mt-3">Trade your unused gift cards for cash safely and easily</p>
-        <Link to="/loginpage" className="mt-6 inline-block bg-white text-blue-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-200">Get Started</Link>
+        <Link to="/login" className="mt-6 inline-block bg-white text-blue-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-200">Get Started</Link>
       </section>
 
       {/* Featured Product Section */}

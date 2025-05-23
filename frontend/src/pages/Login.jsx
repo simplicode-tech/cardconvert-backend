@@ -63,7 +63,7 @@ export default function Login() {
         {/* Signup Link */}
         <p className="text-center text-gray-200 mt-4">
           Don't have an account?{" "}
-          <Link to="/signuppage" className="text-blue-600 font-semibold hover:underline">
+          <Link to="/signup" className="text-blue-600 font-semibold hover:underline">
             Sign Up Here
           </Link>
         </p>
