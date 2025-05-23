@@ -1,7 +1,7 @@
 import Customer from "../models/customer.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-export const login = async (req, res) => {
+export const loginhandle = async (req, res) => {
     try{
         const {email, password} = req.body;
         // find user

@@ -1,5 +1,5 @@
 import express from 'express';
 const router = express.Router();
-import {login} from '../handlers/loginHandler.js';
-router.post('/login', login);
+import {loginhandle} from '../handlers/loginHandler.js';
+router.post('/login', loginhandle);
 export default router;
