@@ -9,7 +9,7 @@ const SignUpForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("https://cardconvert-backend.onrender.com/user/signuppage", data);
+      const response = await axios.post("https://cardconvert-backend.onrender.com/user/signup", data);
       toast.success(response.data.message);
       reset();
     } catch (error) {

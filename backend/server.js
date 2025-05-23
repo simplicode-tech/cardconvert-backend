@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import signUpRoute from './routes/signUpRoute.js';
 import loginRoute from './routes/loginRoute.js';
+import tradegiftcardroute from './routes/tradegiftcardroute.js';
 
 
 const app = express();
@@ -16,5 +17,7 @@ mongoose.connect(process.env.MONGO_URI).then(() => console.log('MongoDB connecte
 app.use('/user', signUpRoute);
 // log in route
 app.use('/user', loginRoute);
+// uploadgiftcard route
+app.use('/userdashboard', tradegiftcardroute);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

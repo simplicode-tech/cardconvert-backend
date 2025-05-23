@@ -15,7 +15,7 @@ export default function Login() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post("https://cardconvert-backend.onrender.com/user/loginpage", data);
+      const response = await axios.post("https://cardconvert-backend.onrender.com/user/login", data);
       toast.success(response.data.message);
 
       // Save token
