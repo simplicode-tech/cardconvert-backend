@@ -1,14 +1,17 @@
 import {Link} from 'react-router-dom'
 import Button from '../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { MainHeaderSection } from '../components/MainHeaderSection';
+import { toast } from 'react-toastify';
 import { SpinnerLoading } from '../components/SpinnerLoading';
 
 export default function UserDashboard() {
 
 // spinner loading state
 const [isLoading, setIsLoading] = useState(false);
+
 // sell cards component control
 const [isSellCard, setIsSellCard] = useState(false);
 const openSellCard = () => {
@@ -17,10 +20,30 @@ const openSellCard = () => {
 const closeSellCard = () => {
   setIsSellCard(false);
 };
+// giftcard tradeupload states
 const [cardcategory, setCardCategory] = useState('');
 const [cardType, setCardType] = useState('');
-const [amountofcard, setAmountofcard] = useState(null);
+const [cardamount, setcardamount] = useState(null);
 const [cardphotos, setCardPhotos] = useState(null);
+const tradeuploadData = {cardcategory, cardType, cardamount};
+
+// states for available giftcard data from the backend
+const [availablecardcategory, setavailableCardCategory] = useState(null);
+const [availablecardType, setavailableCardType] = useState(null);
+
+
+useEffect(() => {
+const availableGiftCardData = async () => {
+  try{
+    const response = await axios.get('https://cardconvert-backend.onrender.com/admin/updatecardbase');
+console.log(response.data)
+    setavailableCardCategory(response.data.cardcategory);
+    setavailableCardType(response.data.cardtype);
+  }catch(err){console.log(err)}
+
+};
+availableGiftCardData();
+}, []);
 
 //transactions components controll
 const [isTrans, setIsTrans] = useState(false);
@@ -56,30 +79,37 @@ const ActionCard = () => {
 
 // sell gift cards
 const SellGiftCards = () => {
-  const cardscate = ['apple', 'amazon', 'google', 'sephora', 'visa', 'xbox'];
-  const cardstype = ['apple (20 - 100)', 'amazon (100 - 500)', 'google (50 - 100)', 'sephora (20 - 100)', 'visa (20 - 100)', 'xbox (20 - 100)']
-   
+   // handle submit
+  const handleSubmitTrade = async (e) => {
+    e.preventDefault();
+    try{
+      const response = await axios.post('https://cardconvert-backend.onrender.com/userdashboard/uploadgiftcard', tradeuploadData);
+       toast.success(response.data.message);
+
+    }catch(err){ console.log(err)}
+   };
+
   return(
   <div className='border-2 px-4 mx-auto my-2 bg-gray-900 fixed inset-0'>
     <p onClick={closeSellCard} className='bg-gray-200 rounded-md border-2 w-10'>close</p>
-    <h1 className='text-center text-white font-bold'>Upload Gift Cards {cardType}</h1>
+    <h1 className='text-center text-white font-bold'>Upload Gift Cards</h1>
     <p className='my-2 text-white'>Select Card Category:</p>
       <select className='w-full p-3 bg-gray-200' value={cardcategory} onChange={(e) => setCardCategory(e.target.value)}>
-        {cardscate.map((card, index) => (
+        {availablecardcategory.map((card, index) => (
           <option key={index} className='bg-gray-500'>{card}</option>
         ))}
       </select>
       <p className='my-2 text-white'>Select Card Type:</p>
       <select className='w-full p-3 bg-gray-200'  value={cardType} onChange={(e) => setCardType(e.target.value)}>
-        {cardstype.map((card, index) => (
+        {availablecardType.map((card, index) => (
           <option key={index} className='bg-gray-500'>{card}</option>
         ))}
       </select>
       <p className='my-2 text-white'>Amount:</p>
-      <input type='text' value={amountofcard} onChange={(e) => setAmountofcard(e.target.value)} placeholder='Amount of the Card' className='w-full p-3 bg-gray-200' />
+      <input type='text' value={cardamount} onChange={(e) => setcardamount(e.target.value)} placeholder='Amount of the Card' className='w-full p-3 bg-gray-200' />
       <p className='my-2 text-white'>Upload Photos of the Gift Cards:</p>
       <input type='file' placeholder='Upload Card Photos' className='w-full p-3 bg-gray-200' />
-      <Button value={'SUBMIT'} className={'my-4 flex items-center bg-gray-600 p-2 rounded-md border-2 border-gray-900 font-bold text-white'}/>
+      <Button value={'SUBMIT'} handleClick={handleSubmitTrade} className={'my-4 flex items-center bg-gray-600 p-2 rounded-md border-2 border-gray-900 font-bold text-white'}/>
   </div>
 )
 };
@@ -118,7 +148,6 @@ const TransactionsHistory = () => {
     <ActionCard/>
     {isSellCard && <SellGiftCards/>}
    {isTrans && <TransactionsHistory/>} 
-   {isLoading && <SpinnerLoading message={'Loading....'}/>}
     </div>
   )
 }

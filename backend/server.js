@@ -1,5 +1,4 @@
 import express from 'express';
-dotenv.config();
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -7,7 +6,8 @@ import signUpRoute from './routes/signUpRoute.js';
 import loginRoute from './routes/loginRoute.js';
 import authenticateUser from './middlewares/authenticateUser.js'
 import tradegiftcardroute from './routes/tradegiftcardroute.js';
-
+import updateCardBaseRoute from './routes/updateCardBaseRoute.js'
+dotenv.config();
 
 const app = express();
 app.use(cors());
@@ -20,5 +20,7 @@ app.use('/user', signUpRoute);
 app.use('/user', loginRoute);
 // uploadgiftcard route
 app.use('/userdashboard', authenticateUser, tradegiftcardroute);
+// update card base
+app.use('/admin', updateCardBaseRoute);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

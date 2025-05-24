@@ -10,8 +10,7 @@ export default function Home() {
           <h1 className="text-xl font-bold">BrandName</h1>
           <nav className="space-x-6">
             <Link to="/" className="hover:underline">Home</Link>
-            <Link to="/products" className="hover:underline">Products</Link>
-            <Link to="/contact" className="hover:underline">Contact</Link>
+            <Link to="/admin" className="hover:underline">Admin</Link>
             <Link to="/login" className="bg-white text-blue-600 px-4 py-2 rounded-md">Login</Link>
           </nav>
         </div>

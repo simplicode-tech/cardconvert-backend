@@ -17,7 +17,6 @@ export default function Login() {
     try {
       const response = await axios.post("https://cardconvert-backend.onrender.com/user/login", data);
       toast.success(response.data.message);
-
       // Save token
       localStorage.setItem("token", response.data.token);
       reset();
