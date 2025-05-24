@@ -7,6 +7,7 @@ import loginRoute from './routes/loginRoute.js';
 import authenticateUser from './middlewares/authenticateUser.js'
 import tradegiftcardroute from './routes/tradegiftcardroute.js';
 import updateCardBaseRoute from './routes/updateCardBaseRoute.js'
+import findAllCardBaseRoute from './routes/findAllCardBaseRoute.js'
 dotenv.config();
 
 const app = express();
@@ -22,5 +23,7 @@ app.use('/user', loginRoute);
 app.use('/userdashboard', authenticateUser, tradegiftcardroute);
 // update card base
 app.use('/admin', updateCardBaseRoute);
+// find all card base
+app.use('/admin', findAllCardBaseRoute);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
