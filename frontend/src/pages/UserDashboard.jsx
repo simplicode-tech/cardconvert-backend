@@ -23,7 +23,7 @@ const closeSellCard = () => {
 // giftcard tradeupload states
 const [cardcategory, setCardCategory] = useState('');
 const [cardType, setCardType] = useState('');
-const [cardamount, setcardamount] = useState(null);
+const [cardamount, setcardamount] = useState('');
 const [cardphotos, setCardPhotos] = useState(null);
 const tradeuploadData = {cardcategory, cardType, cardamount};
 
@@ -33,14 +33,17 @@ const [availablecardType, setavailableCardType] = useState(null);
 
 
 useEffect(() => {
+  setIsLoading(true);
 const availableGiftCardData = async () => {
   try{
     const response = await axios.get('https://cardconvert-backend.onrender.com/admin/updatecardbase');
-console.log(response.data);
     setavailableCardCategory(response.data.allCards);
     setavailableCardType(response.data.allCards);
-  }catch(err){console.log(err)}
-
+  }
+  catch(err){console.log(err)}
+  finally{
+    setIsLoading(false);
+  }
 };
 availableGiftCardData();
 }, []);
@@ -93,22 +96,22 @@ const SellGiftCards = () => {
   <div className='border-2 px-4 mx-auto my-2 bg-gray-900 fixed inset-0'>
     <p onClick={closeSellCard} className='bg-gray-200 rounded-md border-2 w-10'>close</p>
     <h1 className='text-center text-white font-bold'>Upload Gift Cards</h1>
-    <p className='my-2 text-white'>Select Card Category:</p>
-      <select className='w-full p-3 bg-gray-200' value={cardcategory} onChange={(e) => setCardCategory(e.target.value)}>
+    <label htmlFor='cardcategory' className='my-2 text-white'>Select Card Category:</label>
+      <select className='w-full p-3 bg-gray-200'id='cardcategory' value={cardcategory} onChange={(e) => setCardCategory(e.target.value)}>
         {availablecardcategory.map((card) => (
-          <option key={card._id} className='bg-gray-500'>{card}</option>
+          <option key={card._id} className='bg-gray-500'>{card.cardcategory}</option>
         ))}
       </select>
-      <p className='my-2 text-white'>Select Card Type:</p>
-      <select className='w-full p-3 bg-gray-200'  value={cardType} onChange={(e) => setCardType(e.target.value)}>
+      <label htmlFor='cardtype' className='my-2 text-white'>Select Card Type:</label>
+      <select className='w-full p-3 bg-gray-200' id='cardtype' value={cardType} onChange={(e) => setCardType(e.target.value)}>
         {availablecardType.map((card) => (
-          <option key={card._id} className='bg-gray-500'>{card}</option>
+          <option key={card._id} className='bg-gray-500'>{card.cardtype}</option>
         ))}
       </select>
-      <p className='my-2 text-white'>Amount:</p>
-      <input type='text' value={cardamount} onChange={(e) => setcardamount(e.target.value)} placeholder='Amount of the Card' className='w-full p-3 bg-gray-200' />
-      <p className='my-2 text-white'>Upload Photos of the Gift Cards:</p>
-      <input type='file' placeholder='Upload Card Photos' className='w-full p-3 bg-gray-200' />
+      <label htmlFor='cardamount' className='my-2 text-white'>Amount:</label>
+      <input type='text' id='cardamount' value={cardamount} onChange={(e) => setcardamount(e.target.value)} placeholder='Amount of the Card' className='w-full p-3 bg-gray-200' />
+      <label htmlFor='cardphotos' className='my-2 text-white'>Upload Photos of the Gift Cards:</label>
+      <input type='file' id='cardphotos' placeholder='Upload Card Photos' className='w-full p-3 bg-gray-200' />
       <Button value={'SUBMIT'} handleClick={handleSubmitTrade} className={'my-4 flex items-center bg-gray-600 p-2 rounded-md border-2 border-gray-900 font-bold text-white'}/>
   </div>
 )
@@ -147,7 +150,8 @@ const TransactionsHistory = () => {
     <BalanceCard/>
     <ActionCard/>
     {isSellCard && <SellGiftCards/>}
-   {isTrans && <TransactionsHistory/>} 
+   {isTrans && <TransactionsHistory/>}
+   {isLoading && <SpinnerLoading/>}
     </div>
   )
 }

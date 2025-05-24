@@ -21,12 +21,14 @@ await newTrade.save();
 
 // update customer trade history
 const tradehistory = {cardcategory, cardtype, cardamount, createdat, cardrate, cardstatus};
-const newtradehistory = await Customer.findOne({email:submitedby}, 'tradehistory');
-newtradehistory.push(tradehistory);
+const customer = await Customer.findOne({email:submitedby});
+if (!customer) {return res.status(404).json({ message: "Customer not found" });};
+customer.tradehistory.push(tradehistory);
+await customer.save();
 
 //responses
 const message = 'Trade Submitted Successfully! \n Check Your Trade History';
 res.status(200).json({message,})
 
-}catch(err){res.status(400).json({message: 'We Are Sorry, Unexpected Error Occured!'})}
+}catch(err){res.status(500).json({message: 'We Are Sorry, Unexpected Error Occured!'})}
 };

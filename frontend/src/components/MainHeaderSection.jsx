@@ -10,7 +10,7 @@ export const MainHeaderSection = () => {
        </div>
        <div className='w-screen flex justify-evenly font-bold'>
           <Link to='/loginpage' className="p-4 m-2 bg-gray-900 text-white rounded-md border"><FontAwesomeIcon icon={faUser}/></Link>
-          <FontAwesomeIcon icon={faBell} className='text-xl text-white p-4 border m-2 rounded-md' Alert/>
+          <FontAwesomeIcon icon={faBell} className='text-xl text-white p-4 border m-2 rounded-md'/>
         </div>
         </section>
       )
