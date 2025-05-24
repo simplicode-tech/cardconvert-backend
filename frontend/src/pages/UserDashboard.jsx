@@ -36,9 +36,9 @@ useEffect(() => {
 const availableGiftCardData = async () => {
   try{
     const response = await axios.get('https://cardconvert-backend.onrender.com/admin/updatecardbase');
-console.log(response.data)
-    setavailableCardCategory(response.data.cardcategory);
-    setavailableCardType(response.data.cardtype);
+console.log(response.data);
+    setavailableCardCategory(response.data.allCards);
+    setavailableCardType(response.data.allCards);
   }catch(err){console.log(err)}
 
 };
@@ -95,14 +95,14 @@ const SellGiftCards = () => {
     <h1 className='text-center text-white font-bold'>Upload Gift Cards</h1>
     <p className='my-2 text-white'>Select Card Category:</p>
       <select className='w-full p-3 bg-gray-200' value={cardcategory} onChange={(e) => setCardCategory(e.target.value)}>
-        {availablecardcategory.map((card, index) => (
-          <option key={index} className='bg-gray-500'>{card}</option>
+        {availablecardcategory.map((card) => (
+          <option key={card.id} className='bg-gray-500'>{card}</option>
         ))}
       </select>
       <p className='my-2 text-white'>Select Card Type:</p>
       <select className='w-full p-3 bg-gray-200'  value={cardType} onChange={(e) => setCardType(e.target.value)}>
-        {availablecardType.map((card, index) => (
-          <option key={index} className='bg-gray-500'>{card}</option>
+        {availablecardType.map((card) => (
+          <option key={card.id} className='bg-gray-500'>{card}</option>
         ))}
       </select>
       <p className='my-2 text-white'>Amount:</p>
