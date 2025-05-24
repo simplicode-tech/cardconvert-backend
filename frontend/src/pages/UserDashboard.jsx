@@ -96,13 +96,13 @@ const SellGiftCards = () => {
     <p className='my-2 text-white'>Select Card Category:</p>
       <select className='w-full p-3 bg-gray-200' value={cardcategory} onChange={(e) => setCardCategory(e.target.value)}>
         {availablecardcategory.map((card) => (
-          <option key={card.id} className='bg-gray-500'>{card}</option>
+          <option key={card._id} className='bg-gray-500'>{card}</option>
         ))}
       </select>
       <p className='my-2 text-white'>Select Card Type:</p>
       <select className='w-full p-3 bg-gray-200'  value={cardType} onChange={(e) => setCardType(e.target.value)}>
         {availablecardType.map((card) => (
-          <option key={card.id} className='bg-gray-500'>{card}</option>
+          <option key={card._id} className='bg-gray-500'>{card}</option>
         ))}
       </select>
       <p className='my-2 text-white'>Amount:</p>
