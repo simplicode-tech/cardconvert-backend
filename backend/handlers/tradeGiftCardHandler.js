@@ -1,6 +1,6 @@
 import GiftCard from "../models/giftCards.js";
 import AllCardBase from "../models/allCardsBase.js";
-import Customer from "../models/customer.js";
+import User from "../models/user.js";
 export const giftcardupload = async (req, res) => {
 
 try{
@@ -21,7 +21,7 @@ await newTrade.save();
 
 // update customer trade history
 const tradehistory = {cardcategory, cardtype, cardamount, createdat, cardrate, cardstatus};
-const customer = await Customer.findOne({email:submitedby});
+const customer = await User.findOne({email:submitedby});
 if (!customer) {return res.status(404).json({ message: "Customer not found" });};
 customer.tradehistory.push(tradehistory);
 await customer.save();

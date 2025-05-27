@@ -1,17 +1,17 @@
-import Customer from "../models/customer.js";
+import User from "../models/user.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 export const loginhandle = async (req, res) => {
     try{
         const {email, password} = req.body;
         // find user
-        const user = await Customer.findOne({email});
+        const user = await User.findOne({email});
         if(!user) return res.status(400).json({ message: `${email} does not exists!, Try again`});
         // check password match
         const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch) return res.status(400).json({ message: 'Incorrect Password!'});
         // const token
-        const token = jwt.sign({id: user._id, email:user.email}, process.env.JWT_SECRET, {expiresIn: '1h'});
+        const token = jwt.sign({id: user._id, email:user.email}, process.env.JWT_SECRET, {expiresIn: '10m'});
         // response
         res.status(200).json({
             token, 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ProductCard from "../components/FeaturedCard";
-
+import {UploadImage} from './imagetestingpage';
 export default function Home() {
   return (
     <div className="max-w-screen bg-gray-100 min-h-screen">
@@ -10,7 +10,7 @@ export default function Home() {
           <h1 className="text-xl font-bold">BrandName</h1>
           <nav className="space-x-6">
             <Link to="/" className="hover:underline">Home</Link>
-            <Link to="/admin" className="hover:underline">Admin</Link>
+            <Link to="/adminhome" className="hover:underline">Admin</Link>
             <Link to="/login" className="bg-white text-blue-600 px-4 py-2 rounded-md">Login</Link>
           </nav>
         </div>
@@ -28,7 +28,7 @@ export default function Home() {
         <h3 className="text-2xl font-bold text-center mb-6">HOT RATES !!!</h3>
         <ProductCard />
       </section>
-
+      <UploadImage/>
       {/* Footer */}
       <footer className="bg-gray-800 text-white text-center p-6 mt-auto">
         <p>© 2025 BrandName. All Rights Reserved.</p>

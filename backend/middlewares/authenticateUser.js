@@ -1,21 +1,21 @@
 import jwt from 'jsonwebtoken';
 
-const authenticateUser = (req, res, next) => {
-  const authHeader = req.header("Authorization");
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+export const authenticateUser = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
     return res.status(401).json({ message: "Access denied. No token provided." });
   }
 
-  const token = authHeader.split(" ")[1]; // Extract token from "Bearer <token>"
-
+  const token = authHeader.split(" ")[1];
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verify token
-    req.user = decoded; // Attach user to the request
-    next(); // Continue to the route
-  } catch (error) {
-    res.status(400).json({ message: "Invalid token." });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; 
+    next();
+  } catch{
+    return res.status(400).json({ message: "Invalid token." });
   }
 };
-
-export default authenticateUser;
+ export const isAdmin = (req, res, next) => {
+  if(req.user.role !=='admin') return res.status(403).send('unauthorized access!')
+  next();
+};

@@ -19,7 +19,7 @@ const SignUpForm = () => {
 
   return (
     <div className="flex items-center justify-center max-h-screen">
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-900 fixed inset-0 shadow-lg border rounded-xl p-6 max-w-md w-full">
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-900 h-screen shadow-lg border rounded-xl p-6 max-w-md">
        <h1 className="text-2xl font-bold text-center text-gray-200 mb-6">Create Your Account</h1>
 
         {/* Input Fields */}
